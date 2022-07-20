@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="908.8,1176.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upaf="clr-namespace:UiPath.Persistence.Activities.FormTask;assembly=UiPath.Persistence.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="908.8,2019.2" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upaf="clr-namespace:UiPath.Persistence.Activities.FormTask;assembly=UiPath.Persistence.Activities" xmlns:upat="clr-namespace:UiPath.Persistence.Activities.Tasks;assembly=UiPath.Persistence.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="30">
+    <scg:List x:TypeArguments="x:String" Capacity="31">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -31,6 +31,7 @@
       <x:String>UiPath.Persistence.Activities.FormTask</x:String>
       <x:String>UiPath.Persistence.Activities.BaseTask</x:String>
       <x:String>UiPath.Persistence.Activities</x:String>
+      <x:String>UiPath.Persistence.Activities.Tasks</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -54,24 +55,34 @@
       <AssemblyReference>UiPath.Persistence.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Action Center" sap:VirtualizedContainerService.HintSize="375.2,1112" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Action Center" sap:VirtualizedContainerService.HintSize="538.4,1954.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="Imbursement_Amt" />
       <Variable x:TypeArguments="x:Int32" Name="Approved_Amt" />
       <Variable x:TypeArguments="upaf:FormTaskData" Name="Task_Obj" />
       <Variable x:TypeArguments="x:String" Name="Task_Action" />
+      <Variable x:TypeArguments="scg:List(upat:TaskUserAssignment)" Name="User_Assignment">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="scg:List(upat:TaskUserAssignment)" ExpressionText="new list(of TaskUserAssignment)" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="scg:List(upat:TaskAssignmentResponse)" Name="Failed_TaskAssignment">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="scg:List(upat:TaskAssignmentResponse)" ExpressionText="new list(of TaskAssignmentResponse)" />
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="333.6,241.6" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Enter the Imbursement Amount" Title="Imbursement Approval">
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="496.8,241.6" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Enter the Imbursement Amount" Title="Imbursement Approval">
       <ui:InputDialog.Result>
         <OutArgument x:TypeArguments="x:Int32">[Imbursement_Amt]</OutArgument>
       </ui:InputDialog.Result>
     </ui:InputDialog>
-    <upaf:CreateFormTask BucketFolderPath="{x:Null}" BucketName="{x:Null}" BulkFormLayout="{x:Null}" ExternalTag="{x:Null}" Labels="{x:Null}" TaskCatalog="{x:Null}" TimeoutMs="{x:Null}" BulkFormLayoutGuid="3860d460-dd8d-46ec-970e-07767a95877e" DisplayName="Create Form Task" EnableBulkEdit="False" FormLayout="%[{&quot;label&quot;:&quot;Re-imbursement amount&quot;,&quot;placeholder&quot;:&quot;Enter the amount&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;delimiter&quot;:false,&quot;requireDecimal&quot;:false,&quot;key&quot;:&quot;in_Imbursement&quot;,&quot;type&quot;:&quot;number&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Approved Amount&quot;,&quot;placeholder&quot;:&quot;Enter the Amount&quot;,&quot;tableView&quot;:true,&quot;delimiter&quot;:false,&quot;requireDecimal&quot;:false,&quot;key&quot;:&quot;out_Approved&quot;,&quot;type&quot;:&quot;number&quot;,&quot;input&quot;:true},{&quot;mask&quot;:false,&quot;customClass&quot;:&quot;uipath-button-container&quot;,&quot;tableView&quot;:true,&quot;alwaysEnabled&quot;:false,&quot;type&quot;:&quot;table&quot;,&quot;input&quot;:false,&quot;key&quot;:&quot;key&quot;,&quot;label&quot;:&quot;label&quot;,&quot;rows&quot;:[[{&quot;components&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;submit&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;alwaysEnabled&quot;:false,&quot;isResetData&quot;:false}]},{&quot;components&quot;:[]},{&quot;components&quot;:[]},{&quot;components&quot;:[]},{&quot;components&quot;:[]},{&quot;components&quot;:[]}]],&quot;numRows&quot;:1,&quot;numCols&quot;:6,&quot;reorder&quot;:false}]" FormLayoutGuid="07a185b4-65da-4217-9b6e-f718056f97d9" GenerateInputFields="True" sap:VirtualizedContainerService.HintSize="333.6,372.8" sap2010:WorkflowViewState.IdRef="CreateFormTask_1" TaskOutput="[Task_Obj]" TaskPriority="[TaskPriority.Medium]" TaskTitle="Need Approval for Imbursement">
+    <upaf:CreateFormTask BucketFolderPath="{x:Null}" BucketName="{x:Null}" BulkFormLayout="{x:Null}" ExternalTag="{x:Null}" Labels="{x:Null}" TaskCatalog="{x:Null}" TimeoutMs="{x:Null}" BulkFormLayoutGuid="3860d460-dd8d-46ec-970e-07767a95877e" DisplayName="Create Form Task" EnableBulkEdit="False" FormLayout="%[{&quot;label&quot;:&quot;Re-imbursement amount&quot;,&quot;placeholder&quot;:&quot;Enter the amount&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;delimiter&quot;:false,&quot;requireDecimal&quot;:false,&quot;key&quot;:&quot;in_Imbursement&quot;,&quot;type&quot;:&quot;number&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Approved Amount&quot;,&quot;placeholder&quot;:&quot;Enter the Amount&quot;,&quot;tableView&quot;:true,&quot;delimiter&quot;:false,&quot;requireDecimal&quot;:false,&quot;key&quot;:&quot;out_Approved&quot;,&quot;type&quot;:&quot;number&quot;,&quot;input&quot;:true},{&quot;mask&quot;:false,&quot;customClass&quot;:&quot;uipath-button-container&quot;,&quot;tableView&quot;:true,&quot;alwaysEnabled&quot;:false,&quot;type&quot;:&quot;table&quot;,&quot;input&quot;:false,&quot;key&quot;:&quot;key&quot;,&quot;label&quot;:&quot;label&quot;,&quot;rows&quot;:[[{&quot;components&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Approved&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;alwaysEnabled&quot;:false,&quot;isResetData&quot;:false}]},{&quot;components&quot;:[{&quot;label&quot;:&quot;Reject&quot;,&quot;tableView&quot;:false,&quot;key&quot;:&quot;Rejected&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;input&quot;:true,&quot;type&quot;:&quot;button&quot;,&quot;isResetData&quot;:false}]},{&quot;components&quot;:[]},{&quot;components&quot;:[]},{&quot;components&quot;:[]},{&quot;components&quot;:[]}]],&quot;numRows&quot;:1,&quot;numCols&quot;:6,&quot;reorder&quot;:false}]" FormLayoutGuid="6d45adf0-fee9-4f41-9cf9-99e70d1ffccd" GenerateInputFields="True" sap:VirtualizedContainerService.HintSize="496.8,372.8" sap2010:WorkflowViewState.IdRef="CreateFormTask_1" TaskOutput="[Task_Obj]" TaskPriority="[TaskPriority.Medium]" TaskTitle="Need Approval for Imbursement">
       <upaf:CreateFormTask.FormData>
         <InArgument x:TypeArguments="x:Int32" x:Key="in_Imbursement">
           <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="Imbursement_Amt" />
@@ -81,7 +92,24 @@
         </OutArgument>
       </upaf:CreateFormTask.FormData>
     </upaf:CreateFormTask>
-    <upaf:WaitForFormTaskAndResume StatusMessage="{x:Null}" TimeoutMs="{x:Null}" WaitItemDataObject="{x:Null}" DisplayName="Wait for Form Task and Resume" sap:VirtualizedContainerService.HintSize="333.6,222.4" sap2010:WorkflowViewState.IdRef="WaitForFormTaskAndResume_1" TaskAction="[Task_Action]" TaskInput="[Task_Obj]" TaskOutput="[Task_Obj]" />
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="333.6,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[Approved_Amt.ToString]" />
+    <AddToCollection x:TypeArguments="upat:TaskUserAssignment" Collection="[User_Assignment]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="496.8,22.4" sap2010:WorkflowViewState.IdRef="AddToCollection`1_4" Item="[new TaskUserAssignment(Task_Obj.Id,&quot;jayavignesh1608@gmail.com&quot;)]" />
+    <upat:AssignTasks TimeoutMs="{x:Null}" DisplayName="Assign Tasks" FailedTaskAssignments="[Failed_TaskAssignment]" sap:VirtualizedContainerService.HintSize="496.8,222.4" sap2010:WorkflowViewState.IdRef="AssignTasks_1" TaskAssignmentType="[TaskAssignmentType.Assign]" TaskUserAssignments="[User_Assignment]" />
+    <upaf:WaitForFormTaskAndResume StatusMessage="{x:Null}" TimeoutMs="{x:Null}" WaitItemDataObject="{x:Null}" DisplayName="Wait for Form Task and Resume" sap:VirtualizedContainerService.HintSize="496.8,222.4" sap2010:WorkflowViewState.IdRef="WaitForFormTaskAndResume_1" TaskAction="[Task_Action]" TaskInput="[Task_Obj]" TaskOutput="[Task_Obj]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="496.8,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Approved Amount - &quot;+Approved_Amt.ToString]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="496.8,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[&quot;Request#&quot;+Task_Obj.Id.ToString]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="496.8,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[&quot;Status - &quot;+Task_Action]" />
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[Task_Action]" sap:VirtualizedContainerService.HintSize="496.8,272.8" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Switch.Default>
+        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="229.6,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="No Action Performed" />
+      </Switch.Default>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <WriteLine x:Key="Approved" DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="229.6,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Request#&quot;+Task_Obj.Id.ToString+&quot; is Approved&quot;]" />
+      <WriteLine x:Key="Rejected" DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="229.6,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[&quot;Request#&quot;+Task_Obj.Id.ToString+&quot; is Rejected&quot;]" />
+    </Switch>
   </Sequence>
 </Activity>
